@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 public class Produto implements Serializable {
@@ -27,6 +29,7 @@ public class Produto implements Serializable {
 	private String nome;
 	private double preco;
 	
+	@JsonBackReference //do outro lado dessa associação já foram buscado os objetos (omite a lista de produtos para cada categoria)
 	@ManyToMany //como a associação é de n pra n é necessário criar uma tabela com os campos de chave extrangeira (jointable)
 	@JoinTable(name = "PROTUDO_CATEGORIA",
 		joinColumns = @JoinColumn(name = "produto_id"),
